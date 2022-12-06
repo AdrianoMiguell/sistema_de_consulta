@@ -1,0 +1,34 @@
+/* Botões */
+.botaoGeral{
+    text-decoration: none;
+    color: #233D4D;
+    display: block;
+    border: solid 2.5px #00B775;
+    border-radius: 7.5px;
+    background: #55D6C2;
+    }
+
+    .botaoGeral:not(hover) {
+      transition-duration: 0.75s;
+    }
+    .botaoGeral:hover {
+      background-color: #233D4D;
+      color: white;
+      transition-duration: 0.75s;
+      box-shadow: 0 0 2px #009dff;
+
+    }
+
+    .botaoGeral:focus {
+      background-color: #233D4D;
+      box-shadow: 0 0 5px #00B775;
+      color: white;
+    }
+
+    /* Para Conteúdo */
+    .content{
+        margin: 1rem 10rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }

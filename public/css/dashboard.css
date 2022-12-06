@@ -1,0 +1,108 @@
+body {
+    overflow-x: visible;
+}
+
+.divSearch{
+    position: relative;
+    width: 100%;
+    height: 65vh;
+    background-color: #233D4D;
+    box-shadow: 0 0 15px #233D4D;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.divSearch img{
+    position: absolute;
+    width: 100%;
+    height: 65vh;
+    opacity: 0.125;
+    left: 0;
+}
+
+.divSearch form, .divSearch h3{
+    z-index: 3;
+}
+
+h3,
+h4,
+h5 {
+    text-shadow: 0 1px 5px white;
+}
+
+.imageBackgrounds {
+    display: block;
+    position: sticky;
+    width: 25rem;
+    height: 15rem;
+    margin: auto;
+    box-shadow: 0 0 5rem #233D4D inset;
+}
+
+.imgs {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 15rem;
+    height: 15rem;
+    display: flex;
+    justify-content: center;
+    margin: 1rem 2rem;
+}
+
+.styleImgs {
+    border: solid 2.5px #00B775;
+    border-radius: 5px;
+    box-shadow: 0 0 1rem #00B775 inset,
+        0 0 5rem #55D6C2 inset,
+        0 0 0.5rem #55D6C2;
+}
+
+img {
+    border-radius: 5px;
+}
+
+.caixaTextoContent {
+    display: flex;
+    justify-content: center;
+}
+
+.caixaTextoContent:nth-child(1) {
+    background: linear-gradient(180deg, #00B775aa 10%, #55D6C299 60%, #55D6C255);
+}
+
+.caixaTextoContent:nth-child(2) {
+    background: linear-gradient(360deg, #00B775aa 10%, #55D6C299 60%, #55D6C211);
+}
+.titTable {
+    color: #233D4D;
+    margin: 2.5rem 0;
+    text-align: center;
+}
+
+thead {
+    background-color: #55D6C2;
+}
+
+/* thead th:first-child{
+border-top-left-radius: 15px;
+}
+thead th:last-child{
+border-top-right-radius: 15px;
+} */
+
+thead th {
+    padding: 5px;
+    text-align: center;
+    border: solid 1px #00B775;
+}
+
+tbody td {
+    border: solid 1px #00B775;
+    border-radius: 5px;
+}
+
+tbody td:first-child {
+    color: #233D4D;
+}

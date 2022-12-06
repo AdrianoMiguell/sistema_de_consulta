@@ -1,0 +1,34 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+
+/* Colors: #233D4D, #00B775, #55D6C2 */
+.nav{
+    /* background: linear-gradient(to right, #55D6C2, #233D4D); */
+    /* background: linear-gradient(to right, #55D6C2, #00B775); */
+    box-shadow: 0 0 15px #233D4D,
+                0 -5px 15px #233D4D inset;
+}
+.title{
+    font-family: 'Courgette', cursive;
+    font-size: 75px;
+}
+
+.title a:link{
+    text-decoration: none;
+    list-style: none;
+    margin: 1rem 2rem;
+    background: linear-gradient(to right, #233D4D, #00B775);
+    background-clip: text;
+    color: transparent;
+    -webkit-background-clip: text;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    position: absolute;
+}
+.dropdown {
+    display: inline-block; /* deixa o LO do "tamanho do próprio texto" e não da largura inteira da tela*/
+    list-style: none; /* rita a "bolinha" do LI*/
+}
+
