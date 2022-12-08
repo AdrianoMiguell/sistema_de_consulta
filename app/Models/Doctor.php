@@ -5,21 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Consult extends Model
+class Doctor extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
         'especialidade',
-        'date',
-        'hour',
-        'image',
-        'user_id'
+        'consult_id',
+        'user_id',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function histories()
+    {
+        return $this->hasMany(Consult::class);
     }
 }

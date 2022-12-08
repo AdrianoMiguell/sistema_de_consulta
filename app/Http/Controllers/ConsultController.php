@@ -7,6 +7,7 @@ use App\Http\Requests\StoreConsultRequest;
 use App\Http\Requests\UpdateConsultRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ConsultController extends Controller
 {
@@ -24,24 +25,20 @@ class ConsultController extends Controller
 
     public function create(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'especialidade' => 'required',
-            'date' => 'required',
-            'hour' => 'required',
-            'image' => ['nullable', 'image']
-        ], [
-            'content.required' => 'O campo :attibute é obrigatório!'
-        ]);
-
-        if ($request['image'] != null) {
-            $request['image'] = $request->image->store('images');
-        }
         $consult = $request->except('_token');
-        // $consult['image'] = $request->image->store('images');
+
+        if (!empty($consult['image'])) {
+            $consult['image'] = $request->image->store('images');
+        }
+        else {
+            $consult['image'] = "imagePerfil.png";
+        }
+
         $consult['user_id'] = Auth::user()->id;
         Consult::create($consult);
-        return back();
+
+        return redirect()->route('dashboard')
+            ->with('status', 'Criado com sucesso!');
     }
 
     public function dashboard(Request $request)
@@ -56,65 +53,14 @@ class ConsultController extends Controller
     public function home(Request $request) {
         $search = Request('search');
             $consults = Consult::where('user_id', Auth::user()->id)->where('especialidade', 'LIKE', "%".$request->search."%")->orWhere('name', 'LIKE', "%".$request->search."%")->orWhere('date', 'LIKE', "%".$request->search."%")->orWhere('hour', 'LIKE', "%".$request->search."%")->orderBy('date', 'asc')->paginate(6);
-            
+
         return view('home', compact('consults'),  compact('search'));
     }
 
-
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreConsultRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreConsultRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Consult  $consult
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Consult $consult)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Consult  $consult
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Consult $consult)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateConsultRequest  $request
-     * @param  \App\Models\Consult  $consult
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateConsultRequest $request, Consult $consult)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Consult  $consult
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Consult $consult)
-    {
-        //
+    public function delete(Request $request){
+        $consult = Consult::findOrFail($request->id);
+        Storage::delete($consult->image);
+        $consult->delete();
+        return back()->with('status', 'Deletado com sucesso!');
     }
 }

@@ -2,88 +2,10 @@
     @extends('layouts.app')
     @extends('layouts.navigation')
 
-    @section('navbar')
-        <div class="dropdown mx-2">
-            <button class="botaoGeral dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                <div>{{ Auth::user()->name }}</div>
-            </button>
-            <ul class="dropdown-menu">
-                <li>
-                    <div class="dropdown-item text-center">{{ Auth::user()->name }}</div>
-                </li>
-                <li>
-                    <div class="dropdown-item text-center">{{ Auth::user()->email }}</div>
-                </li>
-                <li class="d-flex justify-content-center align-items-center mt-2">
-
-                    <!-- Authentication -->
-                    <form action="{{ route('logout') }}" method="post">
-                        @csrf
-                        <button class="dropdown-item botaoGeral" type="submit">Sair</button>
-                    </form>
-
-                </li>
-            </ul>
-        </div>
-    @endsection
-
-    @section('criar_consult')
-        <button type="button" class="botaoGeral" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            + Consulta
-        </button>
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5 text-success" id="exampleModalLabel"> Criar nova consulta</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form method="POST" action="{{ route('create.consult') }}" enctype="multipart/form-data">
-                            @csrf
-                            <div class="mb-3">
-                                <label for="name" class="form-label"> Nome do especialista </label>
-                                <input type="text" class="form-control" id="name" aria-describedby="emailHelp"
-                                    name="name">
-                            </div>
-                            <div class="d-flex justify-content-around align-items-center my-3">
-                                <div class="mx-2">
-                                    <label for="especialidade"> Especialidade</label>
-                                    <select name="especialidade" id="especialidade" title="especialidade"
-                                        class="btn btn-success">
-                                        <option value="Dermatologista">Dermatologista</option>
-                                        <option value="Genética Geral">Genética Geral</option>
-                                        <option value="Clinica Geral">Clinica Geral</option>
-                                        <option value="Psiquiatria">Psiquiatria</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="d-flex justify-content-between align-items-center my-3 mx-2">
-                                <div>
-                                    <label for="date" class="form-label"> Data </label>
-                                    <input type="date" class="form-control" id="date" aria-describedby="emailHelp"
-                                        name="date">
-                                </div>
-                                <div>
-                                    <label for="time" class="form-label"> Hora </label>
-                                    <input type="time" class="form-control" id="time" aria-describedby="emailHelp"
-                                        name="hour">
-                                </div>
-                            </div>
-                            <div class="mb-5">
-                                <label for="image" class="form-label" title="imagem opcional"> Imagem da consulta :
-                                </label>
-                                <input type="file" class="form-control-file" id="image" aria-describedby="emailHelp"
-                                    name="image">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Criar </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+    @section('creates')
+        <div class="d-flex justify-content-between px-5">
+            @include('admin.create_consult')
+            @include('admin.register_doctor')
         </div>
     @endsection
 </header>
@@ -100,8 +22,9 @@
     </div>
 @endsection
 {{-- sessão para mostrar na home (mostrar apenas 6 e depois uma mensagem de "ver mais") --}}
+
 @section('content')
-    @if ($errors->any())
+    {{-- @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
                 @foreach ($errors->all() as $error)
@@ -109,7 +32,13 @@
                 @endforeach
             </ul>
         </div>
-    @endif
+    @endif --}}
+
+    <!-- Session Status -->
+    <x-auth-session-status class="mb-4" :status="session('status')" />
+
+    <!-- Validation Errors -->
+    <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
     <div class="d-flex justify-content-between align-items-center m-2 mx-3 px-5 rounded"
         style="overflow-x: scroll; background-color: #55D6C2;">
@@ -183,7 +112,7 @@
                         <td class="text-center px-2 p-1 col-1"> {{ date('H:i:s', strtotime($consult->hour)) }} </td>
 
                         @if ($consult->image != null)
-                            <td class="text-center px-2 p-1 col-3"> <img src="storage/{{ $consult->image }}"
+                            <td class="text-center px-2 p-1 col-3"> <img src="storage/{{$consult->image}}"
                                     alt="" class="w-75 h-75 styleImgs"> </td>
                         @else
                             <td class="text-center px-2 p-1 col-3">
@@ -196,7 +125,11 @@
                                     data-bs-target="#editar_consult">
                                     Editar
                                 </button>
-                                <button class="botaoGeral my-1" type="submit">deletar</button>
+                                <form action="{{route('delete.consult', ['id' => $consult->id])}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="botaoGeral my-1" type="submit">deletar</button>
+                                </form>
                             </div>
                         </td>
                     </tr>

@@ -34,5 +34,5 @@ Route::get('home', [ConsultController::class, 'home'])->middleware(['auth'])->na
 
 // Rota para criação de notas
 Route::post('create_consult', [ConsultController::class, 'create'])->name('create.consult');
-
+Route::post('delete', [ConsultController::class, 'delete'])->name('delete.consult');
 
