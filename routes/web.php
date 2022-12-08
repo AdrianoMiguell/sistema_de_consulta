@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ConsultController;
+use App\Http\Controllers\DoctorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,17 +23,12 @@ Route::fallback(function () {
     return '<h1 style="text-align: center; color: red;">Página não encontrada!</h1>';
 });
 
-require __DIR__.'/auth.php';
-
-//Rota para o home
-// Route::get('home', [ConsultController::class, 'home'])->name('home');
-
-// Rota para o dashboard
 Route::get('dashboard', [ConsultController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
-
 Route::get('home', [ConsultController::class, 'home'])->middleware(['auth'])->name('home');
 
 // Rota para criação de notas
 Route::post('create_consult', [ConsultController::class, 'create'])->name('create.consult');
-Route::post('delete', [ConsultController::class, 'delete'])->name('delete.consult');
+Route::post('delete_consult', [ConsultController::class, 'delete'])->name('delete.consult');
+Route::post('register_doctor', [DoctorController::class, 'register'])->name('register.doctor');
 
+require __DIR__.'/auth.php';

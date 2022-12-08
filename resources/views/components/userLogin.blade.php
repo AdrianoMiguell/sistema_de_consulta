@@ -25,11 +25,12 @@
                     </ul>
                 </div>
             @else
-                <a href="{{ route('login') }}" class="botaoGeral btn btn-success">Log in</a>
-
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}" class="botaoGeral btn btn-success">Register</a>
-                @endif
+                <div class="d-flex justify-content-between mx-2">
+                    <a href="{{ route('login') }}" class="botaoGeral mx-2 p-1 px-2">Log in</a>
+                                @if (Route::has('register'))
+                    <a href="{{ route('register') }}" class="botaoGeral mx-2 p-1 px-2">Register</a>
+                </div>
+            @endif
             @endauth
         </div>
 

@@ -14,13 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('doctors', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->text('name');
             $table->text('especialidade');
-            $table->foreignId('consult_id')
-            ->constrained()
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
+            $table->string('image')->nullable();
             $table->foreignId('user_id')
             ->constrained()
             ->onUpdate('cascade')

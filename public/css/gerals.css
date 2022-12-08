@@ -32,3 +32,8 @@
         flex-direction: column;
         justify-content: center;
     }
+
+    hr{
+        list-style: #232323;
+ border: 5rem solid #009dff;
+}

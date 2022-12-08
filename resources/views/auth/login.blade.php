@@ -37,21 +37,24 @@
                 </label>
             </div>
 
-            <div class="d-flex align-items-center justify-content-end mt-4">
+            <div class="d-flex align-items-center justify-content-between mt-4 bg-white bg-opacity-50 rounded">
+                <div class="mx-4">
+                    <a href="/" class="my-1 text-shadow text-dark">Voltar ao inicio </a>
+                </div>
                 <div class="d-flex flex-column">
                     @if (Route::has('password.request'))
-                        <a class="text-decoration-none my-1" href="{{ route('password.request') }}">
+                        <a class="my-1 text-shadow text-dark" href="{{ route('password.request') }}">
                             {{ __('Forgot your password?') }}
                         </a>
                     @endif
-                    <a href="register" class="text-decoration-none my-1">
+                    <a href="register" class="my-1 text-shadow text-dark">
                         Cadastrar-se
                     </a>
                 </div>
 
-                <x-button class="btn btn-primary ms-4">
+                <button class="botaoGeral mx-4 p-1 px-3">
                     {{ __('Log in') }}
-                </x-button>
+                </button>
             </div>
         </form>
     </x-auth-card>

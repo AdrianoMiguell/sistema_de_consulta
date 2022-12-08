@@ -29,7 +29,11 @@
                             </select>
                         </div>
                     </div>
-
+                    {{-- @forelse ($doctor as $d)
+                        <div>{{$d->name}} </div>
+                    @empty
+                        <p>sem registro</p>
+                    @endforelse --}}
                     <div class="mb-5">
                         <label for="image" class="form-label" title="imagem opcional"> Foto do médico :
                         </label>

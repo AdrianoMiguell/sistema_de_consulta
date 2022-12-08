@@ -10,10 +10,10 @@
     @endsection
 </header>
 
+{{-- sessão para mostrar na home (mostrar apenas 6 e depois uma mensagem de "ver mais") --}}
 @section('search')
     @include('components.search')
 @endsection
-{{-- sessão para mostrar na home (mostrar apenas 6 e depois uma mensagem de "ver mais") --}}
 
 @section('content')
     {{-- @if ($errors->any())
@@ -32,7 +32,7 @@
     <!-- Validation Errors -->
     <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-    <div class="d-flex justify-content-between align-items-center m-2 mx-3 px-5 rounded"
+    {{-- <div class="d-flex justify-content-between align-items-center m-2 mx-3 px-5 rounded"
         style="overflow-x: scroll; background-color: #55D6C2;">
         @forelse ($consults as $key => $consult)
             @if ($consult->image != null)
@@ -55,7 +55,7 @@
                         </h5>
                         <h5> Data : {{ $consult->date }} </h5>
                         <h5> Hora : {{ $consult->hour }} </h5>
-                        {{-- no home, só deve aparecer botão de visualizar --}}
+                        {{-- no home, só deve aparecer botão de visualizar -
                         <div class="caixaTextoContent align-items-center my-1 w-100 ">
                             <button class="botaoGeral btn btn-success mx-2">visualizar</button>
                         </div>
@@ -68,21 +68,23 @@
                 Nenhuma consulta cadastrada!
             </div>
         @endforelse
-    </div>
+    </div> --}}
 @endsection
 
 @section('table')
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
 
-    <div class="container">
+     <!-- Session Status -->
+    <x-auth-session-status class="mb-4" :status="session('status')" />
+
+    <!-- Validation Errors -->
+    <x-auth-validation-errors class="mb-4" :errors="$errors" />
+
+    <div class="w-100 d-flex justify-content-center">
+        <a href="#" class="m-3 text-dark" id="consult"> Consultas </a>
+        <a href="#" class="m-3 text-dark" id="doctor"> Médicos </a>
+    </div>
+
+    <div class="container" id="PageConsult">
         <table>
             <h3 class="titTable">Consultas cadastradas</h3>
             <thead>
@@ -122,6 +124,11 @@
                                     @method('DELETE')
                                     <button class="botaoGeral my-1" type="submit">deletar</button>
                                 </form>
+                                <form action="{{route('delete.consult', ['id' => $consult->id])}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="botaoGeral my-1" type="submit">deletar</button>
+                                </form>
                             </div>
                         </td>
                     </tr>
@@ -145,9 +152,11 @@
                 @endforelse
             </tbody>
         </table>
+
+
+        <div class="my-5">
+            {{ $consults->appends(['search' => request()->get('search')])->links('vendor.pagination.bootstrap-4') }}
+        </div>
     </div>
 
-    <div class="my-5">
-        {{ $consults->appends(['search' => request()->get('search')])->links('vendor.pagination.bootstrap-4') }}
-    </div>
 @endsection

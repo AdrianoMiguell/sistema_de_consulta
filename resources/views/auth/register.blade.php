@@ -3,6 +3,10 @@
                 <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
+        <h2 class="my-2 mb-3 text-center">
+            Cadastro
+        </h2>
+
             <form method="POST" action="{{ route('register') }}">
                 @csrf
 
@@ -40,20 +44,23 @@
                                 name="password_confirmation" required />
             </div>
 
-            <div class="d-flex align-items-center justify-content-end mt-4">
+            <div class="d-flex align-items-center justify-content-between mt-4 bg-white bg-opacity-50 rounded">
+                <div class="mx-4">
+                    <a href="/" class="my-1 text-shadow text-dark">Voltar ao inicio </a>
+                </div>
                 <div class="d-flex flex-column me-3">
-                    <a class="text-decoration-none my-1" href="{{ route('login') }}">
+                    <a class="my-1 text-shadow text-dark" href="{{ route('login') }}">
                         {{ __('Already registered?') }}
                     </a>
 
 
-                    <a href="login" class="text-decoration-none my-1">
+                    <a href="login" class="my-1 text-shadow text-dark">
                         Logar-se
                     </a>
                 </div>
-                <x-button class="my-4 btn btn-primary">
+                <button class="m-4 botaoGeral p-1 px-3">
                     {{ __('Register') }}
-                </x-button>
+                </button>
             </div>
         </form>
         </x-auth-card>

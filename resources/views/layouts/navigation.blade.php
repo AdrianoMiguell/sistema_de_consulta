@@ -13,11 +13,11 @@
     <span class="title">
         <a href="{{ Route('home') }}">Consultas</a>
     </span>
-    <div class="d-flex justify-content-around w-100 mx-5  bg-success bg-opacity-50 rounded h-100 py-3">
+    <div class="d-flex justify-content-around align-items-center w-100 mx-5 bg-success bg-opacity-50 rounded h-100 py-3">
         @yield('creates')
 
         <div class="dropdown mx-2">
-            <button class="botaoGeral dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="botaoGeral dropdown-toggle p-1 px-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Categorias
             </button>
             <ul class="dropdown-menu">

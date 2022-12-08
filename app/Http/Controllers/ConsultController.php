@@ -5,23 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Consult;
 use App\Http\Requests\StoreConsultRequest;
 use App\Http\Requests\UpdateConsultRequest;
+use App\Models\Doctor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ConsultController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
 
     public function create(Request $request)
     {
@@ -34,7 +24,9 @@ class ConsultController extends Controller
             $consult['image'] = "imagePerfil.png";
         }
 
+        $doctor= Doctor::all();
         $consult['user_id'] = Auth::user()->id;
+        $consult['doctor_id'] = Doctor::where('doctor', '=', $doctor->id)->get();
         Consult::create($consult);
 
         return redirect()->route('dashboard')
@@ -47,14 +39,8 @@ class ConsultController extends Controller
             $consults = Consult::where('user_id', Auth::user()->id)->where('especialidade', 'LIKE', "%".$request->search."%")->orWhere('name', 'LIKE', "%".$request->search."%")->orWhere('date', 'LIKE', "%".$request->search."%")->orWhere('hour', 'LIKE', "%".$request->search."%")->orderBy('date', 'asc')->paginate(6);
 
         return view('dashboard', compact('consults'),  compact('search'));
-        // return view('home', compact('consults'));
-    }
-
-    public function home(Request $request) {
-        $search = Request('search');
-            $consults = Consult::where('user_id', Auth::user()->id)->where('especialidade', 'LIKE', "%".$request->search."%")->orWhere('name', 'LIKE', "%".$request->search."%")->orWhere('date', 'LIKE', "%".$request->search."%")->orWhere('hour', 'LIKE', "%".$request->search."%")->orderBy('date', 'asc')->paginate(6);
-
         return view('home', compact('consults'),  compact('search'));
+        // return view('home', compact('consults'));
     }
 
     public function delete(Request $request){

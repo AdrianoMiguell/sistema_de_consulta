@@ -13,6 +13,7 @@ class Doctor extends Model
         'name',
         'especialidade',
         'consult_id',
+        'image',
         'user_id',
     ];
 
@@ -21,7 +22,7 @@ class Doctor extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function histories()
+    public function consult()
     {
         return $this->hasMany(Consult::class);
     }
