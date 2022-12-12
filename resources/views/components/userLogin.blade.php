@@ -3,7 +3,7 @@
         <div>
             @auth
                 <div class="dropdown mx-2">
-                    <button class="botaoGeral dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class=" dropdown-toggle botaoGeral" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <div>{{ Auth::user()->name }}</div>
                     </button>
                     <ul class="dropdown-menu">
