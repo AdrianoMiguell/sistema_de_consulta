@@ -15,21 +15,25 @@ return new class extends Migration
     {
         Schema::create('consults', function (Blueprint $table) {
             $table->id();
-            $table->text('name');
-            $table->text('especialidade');
+            $table->text('title');
+            $table->text('description');
             $table->date('date');
             $table->time('hour', $precision = 0);
-            $table->string('image')->nullable();
-            $table->bigInteger('doctor');
-            $table->foreignId('user_id')
-            ->constrained()
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
             $table->foreignId('doctor_id')
-            ->constrained()
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->timestamps();
+
+//             Consultas
+
+// titulo
+// Descrição
+// Data
+// Hora
+// Público a atender
+// id_medico
+
         });
     }
 

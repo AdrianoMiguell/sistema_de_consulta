@@ -11,15 +11,13 @@ class Doctor extends Model
 
     protected $fillable = [
         'name',
-        'especialidade',
-        'consult_id',
+        'especialidade_id',
         'image',
-        'user_id',
     ];
 
-    public function user()
+    public function especialidade()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Especialidade::class);
     }
 
     public function consult()

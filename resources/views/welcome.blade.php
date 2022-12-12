@@ -27,7 +27,7 @@
 </style>
 
 <section class="bg-primary w-100 h-100">
-    <img src="storage/boa_consulta_medica2.jpg" alt="" style="width: 100%; height: 75vh; margin:0;">
+    <img src="sistemImages/boa_consulta_medica2.jpg" alt="" style="width: 100%; height: 75vh; margin:0;">
 </section>
 <section class="my-5 py-3 w-100 d-flex justify-content-center align-items-center bg-dark">
     <div id="carouselExampleIndicators" class="carousel slide col-8 d-flex justify-content-center"
@@ -67,11 +67,7 @@
                 <div class="d-flex justify-content-around rounded bg-white">
                     <img src="https://blog.imedicina.com.br/wp-content/uploads/2021/05/iStock-1271897799-1.jpg"
                         class="imagemCaroussel rounded" alt="...">
-                    <p class="text-dark m-2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam quo
-                        itaque
-                        assumenda cupiditate, nostrum aliquid. Animi ipsa repellat est aliquam cumque voluptatum
-                        nobis
-                        dolorem laudantium quisquam, cum modi quis doloribus.</p>
+                    <p class="text-dark m-2">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
                 </div>
             </div>
         </div>

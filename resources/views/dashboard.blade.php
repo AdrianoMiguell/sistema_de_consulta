@@ -1,14 +1,11 @@
-<header>
-    @extends('layouts.app')
-    @extends('layouts.navigation')
 
+    @extends('layouts.app')
     @section('creates')
         <div class="d-flex justify-content-between px-5">
             @include('admin.create_consult')
             @include('admin.register_doctor')
         </div>
     @endsection
-</header>
 
 {{-- sessão para mostrar na home (mostrar apenas 6 e depois uma mensagem de "ver mais") --}}
 @section('search')
@@ -16,15 +13,7 @@
 @endsection
 
 @section('content')
-    {{-- @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif --}}
+
 
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -72,67 +61,50 @@
 @endsection
 
 @section('table')
-
-     <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    <!-- Session Status -->
+    <x-auth-session-status class="alert alert-success my-2" :status="session('status')" />
 
     <!-- Validation Errors -->
-    <x-auth-validation-errors class="mb-4" :errors="$errors" />
+    <x-auth-validation-errors class="alert alert-danger my-2" :errors="$errors" />
 
     <div class="w-100 d-flex justify-content-center">
-        <a href="#" class="m-3 text-dark" id="consult"> Consultas </a>
-        <a href="#" class="m-3 text-dark" id="doctor"> Médicos </a>
+        <a href="{{route('dashboard')}}" class="m-3 mx-5" id="consult" style="opacity: 1;"> Consultas </a>
+        <a href=" {{route('dashboardDoctor')}} " class="m-3 mx-5" id="doctor"> Médicos </a>
     </div>
 
     <div class="container" id="PageConsult">
-        <table>
+        <table class="table">
             <h3 class="titTable">Consultas cadastradas</h3>
             <thead>
                 <tr>
-                    <th class="col-2">Nome do Médico</th>
-                    <th>Especialização</th>
+                    <th class="col-2"> Titulo </th>
+                    <th> Descrição </th>
                     <th>Data</th>
                     <th>Hora</th>
-                    <th> imagem </th>
+                    <th> Médico </th>
                     <th> Ações </th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($consults as $key => $consult)
                     <tr>
-                        <td class="text-center px-2 p-1 col-2"> <strong>{{ $consult->name }}</strong> </td>
-                        <td class="text-center px-2 p-1 col-2"> {{ $consult->especialidade }} </td>
+                        <td class="text-center px-2 p-1 col-2"> <strong>{{ $consult->title }}</strong> </td>
+                        <td class="text-center px-2 p-1 col-2"> {{ $consult->description }} </td>
                         <td class="text-center px-2 p-1 col-1"> {{ date('d/m/Y', strtotime($consult->date)) }} </td>
                         <td class="text-center px-2 p-1 col-1"> {{ date('H:i:s', strtotime($consult->hour)) }} </td>
-
-                        @if ($consult->image != null)
-                            <td class="text-center px-2 p-1 col-3"> <img src="storage/{{$consult->image}}"
-                                    alt="" class="w-75 h-75 styleImgs"> </td>
-                        @else
-                            <td class="text-center px-2 p-1 col-3">
-                                <img src="storage/boa_consulta_medica.jpg" alt="" class="w-75 h-75 styleImgs">
-                            </td>
-                        @endif
+                        <td class="text-center px-2 p-1 col-3"> <div class="d-flex flex-column align-items-center"><span class="my-1">{{ $consult->doctor->name }} </span> <img class="styleImgPerfil my-2" src="{{ asset('storage/images/'. $consult->doctor->image) }}" alt=""></div> </td>
                         <td class="px-2 p-1 col-1">
                             <div class="d-flex flex-column align-items-center">
-                                <button class="botaoGeral my-1" type="button" data-bs-toggle="modal"
-                                    data-bs-target="#editar_consult">
-                                    Editar
-                                </button>
-                                <form action="{{route('delete.consult', ['id' => $consult->id])}}" method="POST">
+                                <a href="{{ route('viewEditConsult', ['id' => $consult->id]) }}" class="botaoGeral my-2 px-3 py-1">Editar
+                                </a>
+                                <form action="{{ route('consultDelete', ['id' => $consult->id]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="botaoGeral my-1" type="submit">deletar</button>
-                                </form>
-                                <form action="{{route('delete.consult', ['id' => $consult->id])}}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="botaoGeral my-1" type="submit">deletar</button>
+                                    <button class="botaoGeral my-2 px-2 py-1" type="submit">Deletar</button>
                                 </form>
                             </div>
                         </td>
                     </tr>
-
                     {{-- Execultar na ultima linha da tabela
                          <tr>
                             <td>
@@ -153,10 +125,14 @@
             </tbody>
         </table>
 
-
+        {{-- <script>
+            $(document).ready(function() {
+                $('.table').DataTable();
+            });
+        </script> --}}
         <div class="my-5">
             {{ $consults->appends(['search' => request()->get('search')])->links('vendor.pagination.bootstrap-4') }}
         </div>
-    </div>
 
+    </div>
 @endsection
