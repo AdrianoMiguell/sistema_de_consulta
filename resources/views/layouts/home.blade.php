@@ -21,13 +21,14 @@
 </head>
 
 <body>
-        <div>
-            @yield('search')
-        </div>
-        <!-- Page Content -->
-        <main class="content">
-            @yield('home')
-        </main>
+    <div>
+        @yield('search')
+    </div>
+    <!-- Page Content -->
+    <main class="content">
+        @yield('home')
+    </main>
+    @yield('footer')
 
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

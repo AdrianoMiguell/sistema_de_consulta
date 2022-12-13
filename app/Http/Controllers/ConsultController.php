@@ -84,10 +84,10 @@ class ConsultController extends Controller
             ]
         );
 
-        $consults = Consult::findOrFail($request->id);
         $consults = $request->except('_token');
+
         Consult::findOrFail($request->id)->update($consults);
-        
+
         return redirect()->route('dashboard')->with('status', 'Editado com sucesso!');
     }
 

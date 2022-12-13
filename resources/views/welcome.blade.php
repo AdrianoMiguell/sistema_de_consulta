@@ -26,12 +26,11 @@
 
 </style>
 
-<section class="bg-primary w-100 h-100">
+<section class="w-100 h-100">
     <img src="sistemImages/boa_consulta_medica2.jpg" alt="" style="width: 100%; height: 75vh; margin:0;">
 </section>
 <section class="my-5 py-3 w-100 d-flex justify-content-center align-items-center bg-dark">
-    <div id="carouselExampleIndicators" class="carousel slide col-8 d-flex justify-content-center"
-        data-bs-ride="true">
+    <div id="carouselExampleIndicators" class="carousel slide col-8 d-flex justify-content-center" data-bs-ride="true">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
                 aria-current="true" aria-label="Slide 1"></button>
@@ -91,6 +90,38 @@
     </div>
 </section>
 
+<section class="d-flex flex-column my-2 py-1">
+    <div class="container d-flex justify-content-around p-5 my-1">
+        <div>
+            <img class="rounded border border-1 shadow" width="250px" height="225px"
+                src="sistemImages/consulta-medica-psicoterapia.webp" alt="">
+        </div>
+        <div>
+            <img class="rounded border border-1 shadow" width="250px" height="225px"
+                src="sistemImages/jovem-medico-traumatologista.webp" alt="">
+        </div>
+        <div>
+            <img class="rounded border border-1 shadow" width="250px" height="225px"
+                src="sistemImages/marcar-consult-idosos.jpg" alt="">
+        </div>
+    </div>
+    <div class="container d-flex justify-content-around p-5 my-1">
+        <div>
+            <img class="rounded border border-1 shadow" width="250px" height="225px"
+                src="sistemImages/consulta-medica-psicoterapia.webp" alt="">
+        </div>
+        <div>
+            <img class="rounded border border-1 shadow" width="250px" height="225px"
+                src="sistemImages/jovem-medico-traumatologista.webp" alt="">
+        </div>
+        <div>
+            <img class="rounded border border-1 shadow" width="250px" height="225px"
+                src="sistemImages/marcar-consult-idosos.jpg" alt="">
+        </div>
+    </div>
+</section>
+
+
 {{--
 {{--
 @forelse ($consults as $key => $consult)
@@ -122,4 +153,10 @@
     Nenhuma consulta cadastrada!
 </div>
 @endforelse --}}
+@endsection
+
+@section('footer')
+<footer class="bg-dark w-100 d-flex justify-content-center align-items-center" style="height: 25vh;">
+    <h1 class="text-white text-shadow fs-1"> Obrigado! </h1>
+</footer>
 @endsection

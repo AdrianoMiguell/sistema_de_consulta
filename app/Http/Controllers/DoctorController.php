@@ -75,13 +75,13 @@ class DoctorController extends Controller
             'name.unique' => 'Este nome já está em uso',
         ]);
 
-        $doctors = Doctor::findOrFail($request->id);
         $doctors = $request->except('_token');
 
         if ($request->image) {
             Storage::delete($request->image);
-            $doctor['image'] = $request->image->store('images');
+            $doctors['image'] = $request->image->store('images');
         }
+
         Doctor::findOrFail($request->id)->update($doctors);
 
         return redirect()->route('dashboardDoctor')->with('status', 'Editado com sucesso!');

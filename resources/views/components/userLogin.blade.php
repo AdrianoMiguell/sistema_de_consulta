@@ -1,6 +1,4 @@
-<div>
     @if (Route::has('login'))
-        <div>
             @auth
                 <div class="dropdown mx-2">
                     <button class=" dropdown-toggle botaoGeral" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -32,8 +30,4 @@
                 </div>
             @endif
             @endauth
-        </div>
-
     @endif
-
-</div>

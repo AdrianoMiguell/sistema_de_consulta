@@ -40,7 +40,7 @@
                     <br>
                     <label for="image" class="form-label" title="imagem opcional"> Nova Foto :
                     </label>
-                    <input type="file" class="form-control-file" id="image" name="image">
+                    <input value="{{ $doctors->image}}" type="file" class="form-control-file" id="image" name="image">
             </div>
             <div class="d-flex justify-content-between mt-1">
                 <button type="submit" class="botaoGeral px-3"> Editar </button>
